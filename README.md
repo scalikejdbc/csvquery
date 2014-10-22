@@ -33,12 +33,15 @@ val records = withCSV(csv) { table =>
   sql"select * from $table".toMap.list.apply()
 }
 
-// NOTE: compilation on the REPL fails, use initialCommands instead.
+// NOTE: 
+// Compilation of DAO definitio on the REPL fails, use initialCommands instead.
+// Also required: "org.skinny-framework" %% "skinny-orm"
 case class User(name: String, age: Int)
 object UserDAO extends SkinnyCSVMapper[User] {
   def csv = CSV("./sample.csv", Seq("name", "age"))
   override def extract(rs: WrappedResultSet, rn: ResultName[User]) = autoConstruct(rs, rn)
 }
+
 val users = UserDAO.findAll()
 val alice = UserDAO.where('name -> "Alice").apply().headOption
 ```
@@ -172,3 +175,8 @@ scala> val alice = UserDAO.where('name -> "Alice").apply().headOption
 alice: Option[User] = Some(User(Alice,23))
 
 ```
+
+More examples here:
+
+https://github.com/seratch/csvquery/blob/master/src/test/scala/example/UsageSpec.scala
+
