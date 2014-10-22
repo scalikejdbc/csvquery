@@ -35,6 +35,23 @@ val records = withCSV(csv) { table =>
   sql"select * from $table".toMap.list.apply()
 }
 
+case class Account(name: String, companyName: String, company: Option[Company])
+case class Company(name: String, url: String)
+
+val (accountsCsv, companiesCsv) = (
+  CSV("src/test/resources/accounts.csv", Seq("name", "company_name")),
+  CSV("src/test/resources/companies.csv", Seq("name", "url"))
+)
+val accounts: Seq[Account] = withCSV(accountsCsv, companiesCsv) { (a, c) =>
+  sql"select a.name, a.company_name, c.url  from $a a left join $c  c on a.company_name = c.name".map { rs =>
+    new Account(
+      name = rs.get("name"),
+      companyName = rs.get("company_name"),
+      company = rs.stringOpt("url").map(url => Company(rs.get("company_name"), url))
+    )
+  }.list.apply()
+}
+
 // NOTE: compilation on the REPL fails, use initialCommands instead.
 case class User(name: String, age: Int)
 object UserDAO extends SkinnyCSVMapper[User] {

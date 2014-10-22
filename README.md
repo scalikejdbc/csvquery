@@ -29,25 +29,49 @@ import scalikejdbc._
 import csvquery._
 implicit val session = autoCSVSession
 
+// ---
+// simple queries
+
 val csv = CSV("./sample.csv", Seq("name", "age"))
 
-val count = withCSV(csv) { table =>
+val count: Long = withCSV(csv) { table =>
   sql"select count(*) from $table".map(_.long(1)).single.apply().get
 }
 
-val records = withCSV(csv) { table =>
+val records: Seq[Map[String, Any]] = withCSV(csv) { table =>
   sql"select * from $table".toMap.list.apply()
 }
 
-// NOTE: 
-// Compilation of DAO definitio on the REPL fails, use initialCommands instead.
-// Also required: "org.skinny-framework" %% "skinny-orm"
+// ---
+// join queries
+
+case class Account(name: String, companyName: String, company: Option[Company])
+case class Company(name: String, url: String)
+
+val (accountsCsv, companiesCsv) = (
+  CSV("src/test/resources/accounts.csv", Seq("name", "company_name")),
+  CSV("src/test/resources/companies.csv", Seq("name", "url"))
+)
+val accounts: Seq[Account] = withCSV(accountsCsv, companiesCsv) { (a, c) =>
+  sql"select a.name, a.company_name, c.url  from $a a left join $c  c on a.company_name = c.name".map { rs =>
+    new Account(
+      name = rs.get("name"),
+      companyName = rs.get("company_name"),
+      company = rs.stringOpt("url").map(url => Company(rs.get("company_name"), url))
+    )
+  }.list.apply()
+}
+
+// ---
+// SkinnyCSVMapper examples
+// also required: "org.skinny-framework" %% "skinny-orm"
+// NOTICE: Compilation of DAO definitio on the REPL fails, use initialCommands instead.
+
 case class User(name: String, age: Int)
 object UserDAO extends SkinnyCSVMapper[User] {
   def csv = CSV("./sample.csv", Seq("name", "age"))
   override def extract(rs: WrappedResultSet, rn: ResultName[User]) = autoConstruct(rs, rn)
 }
-
 val users = UserDAO.findAll()
 val alice = UserDAO.where('name -> "Alice").apply().headOption
 ```
@@ -125,6 +149,42 @@ scala> val records = withCSV(csv) { table =>
     ...
 
 records: List[Map[String,Any]] = List(Map(NAME -> Alice, AGE -> 23), Map(NAME -> Bob, AGE -> 34), Map(NAME -> Chris, AGE -> 30))
+
+scala> val accounts: Seq[Account] = withCSV(accountsCsv, companiesCsv) { (a, c) =>
+     |   sql"select a.name, a.company_name, c.url  from $a a left join $c  c on a.company_name = c.name".map { rs =>
+     |     new Account(
+     |       name = rs.get("name"),
+     |       companyName = rs.get("company_name"),
+     |       company = rs.stringOpt("url").map(url => Company(rs.get("company_name"), url))
+     |     )
+     |   }.list.apply()
+     | }
+13:14:18.590 [run-main-0] DEBUG s.StatementExecutor$$anon$1 - SQL execution completed
+
+  [SQL Execution]
+   select a.name, a.company_name, c.url from csvread('src/test/resources/accounts.csv', 'NAME,COMPANY_NAME', 'UTF-8') a left join csvread('src/test/resources/companies.csv', 'NAME,URL', 'UTF-8') c on a.company_name = c.name; (3 ms)
+
+  [Stack Trace]
+    ...
+    $line4.$read$$iw$$iw$$iw$$iw$$iw$$iw$$anonfun$1.apply(<console>:27)
+    $line4.$read$$iw$$iw$$iw$$iw$$iw$$iw$$anonfun$1.apply(<console>:20)
+    csvquery.CSVQuery$.withCSV(CSVQuery.scala:17)
+    csvquery.package$.withCSV(package.scala:11)
+    $line4.$read$$iw$$iw$$iw$$iw$$iw$$iw$.<init>(<console>:20)
+    $line4.$read$$iw$$iw$$iw$$iw$$iw$$iw$.<clinit>(<console>)
+    $line4.$eval$.$print$lzycompute(<console>:7)
+    $line4.$eval$.$print(<console>:6)
+    $line4.$eval.$print(<console>)
+    sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+    sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    java.lang.reflect.Method.invoke(Method.java:483)
+    scala.tools.nsc.interpreter.IMain$ReadEvalPrint.call(IMain.scala:739)
+    scala.tools.nsc.interpreter.IMain$Request.loadAndRun(IMain.scala:986)
+    ...
+
+accounts: Seq[Account] = List(Account(Alice,Oracle,Some(Company(Oracle,http://www.oracle.com/index.html))), Account(Bob,Google,Some(Company(Google,https://www.google.com/))), Account(Chris,Google,Some(Company(Google,https://www.google.com/))), Account(Denis,Microsoft,None), Account(Eric,Red Hat,Some(Company(Red Hat,http://www.redhat.com/en))), Account(Fred,Facebook,Some(Company(Facebook,https://www.facebook.com/))), Account(George,Google,Some(Company(Google,https://www.google.com/))), Account(Henry,Twitter,Some(Company(Twitter,https://twitter.com/))), Account(Iris,Microsoft,None), Account(John,Google,Some(Company(Google,https://www.google.com/))))
+
 
 scala> val users = UserDAO.findAll()
 13:14:29.032 [run-main-0] DEBUG s.StatementExecutor$$anon$1 - SQL execution completed
