@@ -33,7 +33,7 @@ val records = withCSV(csv) { table =>
   sql"select * from $table".toMap.list.apply()
 }
 
-// NOTE: the following example cannot run on the REPL (2.11.2)
+// NOTE: compilation on the REPL fails, use initialCommands instead.
 case class User(name: String, age: Int)
 object UserDAO extends SkinnyCSVMapper[User] {
   def csv = CSV("./sample.csv", Seq("name", "age"))
