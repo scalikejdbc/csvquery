@@ -24,15 +24,21 @@ class UsageSpec extends FunSpec with Matchers with Logging {
     }
 
     it("filters csv records") {
-      val records = withSession { implicit session =>
-        withCSV(CSV(filepath, headers)) { table =>
-          val (from, to) = (38.45, 38.50)
-          sql"select cdatetime, address, latitude from $table where latitude >= $from and latitude <= $to"
-            .toMap.list.apply()
-        }
+      implicit val session = autoCSVSession
+      val records: Seq[Map[String, Any]] = withCSV(CSV(filepath, headers)) { table =>
+        val (from, to) = (38.45, 38.50)
+        sql"select cdatetime, address, latitude from $table where latitude >= $from and latitude <= $to"
+          .toMap.list.apply()
       }
       logger.info("records: " + records.take(5))
       records.size should equal(1258)
+    }
+
+    it("fails to update csv records") {
+      implicit val session = autoCSVSession
+      intercept[org.h2.jdbc.JdbcSQLException] {
+        withCSV(CSV(filepath, headers)) { table => sql"delete from $table".update.apply() }
+      }
     }
 
   }

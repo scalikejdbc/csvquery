@@ -1,8 +1,14 @@
 # CSVQuery 
 
-Working with CSV files by using SQL!
+`CSVQuery` is a handy SQL runner to work with CSV files. You can use SQL to parse and filter CSV rows!
 
-## Setup
+[![Build Status](https://travis-ci.org/seratch/csvquery.svg)](https://travis-ci.org/seratch/csvquery)
+
+## Prerequisites
+
+- Java SE 7 or higher
+
+## Setup with [sbt](https://github.com/sbt/sbt)
 
 ```sh
 echo 'scalaVersion := "2.11.2"
