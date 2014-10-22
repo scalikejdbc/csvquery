@@ -15,7 +15,7 @@ echo 'scalaVersion := "2.11.2"
 
 resolvers += "sonatype releases" at "https://oss.sonatype.org/content/repositories/releases"
 
-libraryDependencies += "com.github.seratch" %% "csvquery" % "0.1"' > build.sbt
+libraryDependencies += "com.github.seratch" %% "csvquery" % "0.2"' > build.sbt
 
 echo "Alice,23
 Bob,34
@@ -53,7 +53,7 @@ val (accountsCsv, companiesCsv) = (
   CSV("src/test/resources/companies.csv", Seq("name", "url"))
 )
 val accounts: Seq[Account] = withCSV(accountsCsv, companiesCsv) { (a, c) =>
-  sql"select a.name, a.company_name, c.url  from $a a left join $c  c on a.company_name = c.name".map { rs =>
+  sql"select a.name, a.company_name, c.url from $a a left join $c c on a.company_name = c.name".map { rs =>
     new Account(
       name = rs.get("name"),
       companyName = rs.get("company_name"),

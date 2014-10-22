@@ -43,7 +43,7 @@ val (accountsCsv, companiesCsv) = (
   CSV("src/test/resources/companies.csv", Seq("name", "url"))
 )
 val accounts: Seq[Account] = withCSV(accountsCsv, companiesCsv) { (a, c) =>
-  sql"select a.name, a.company_name, c.url  from $a a left join $c  c on a.company_name = c.name".map { rs =>
+  sql"select a.name, a.company_name, c.url from $a a left join $c c on a.company_name = c.name".map { rs =>
     new Account(
       name = rs.get("name"),
       companyName = rs.get("company_name"),
