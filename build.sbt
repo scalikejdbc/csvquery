@@ -1,26 +1,22 @@
-organization := "com.github.seratch"
-name := "csvquery"
-version := "0.2"
-
-scalaVersion := "2.11.2"
-crossScalaVersions := Seq("2.10.4", "2.11.2")
-
-libraryDependencies ++= Seq(
-  "com.h2database"       %  "h2"              % "1.4.182",
-  "org.scalikejdbc"      %% "scalikejdbc"     % "2.1.2",
-  "org.skinny-framework" %% "skinny-orm"      % "1.3.4"   % "provided",
-  "ch.qos.logback"       %  "logback-classic" % "1.1.2"   % "provided",
-  "org.skinny-framework" %  "skinny-logback"  % "1.0.3"   % "test",
-  "org.scalatest"        %% "scalatest"       % "2.2.2"   % "test"
-)
-
-parallelExecution in Test := false
-logBuffered in Test := false
-scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
-
-scalariformSettings
-
-initialCommands := """
+lazy val root = (project in file("."))
+  .settings(
+    organization := "com.github.seratch",
+    name := "csvquery",
+    version := "0.3-SNAPSHOT",
+    scalaVersion := "2.11.4",
+    crossScalaVersions := Seq("2.10.4", "2.11.4"),
+    libraryDependencies ++= Seq(
+      "com.h2database"       %  "h2"              % "1.4.182",
+      "org.scalikejdbc"      %% "scalikejdbc"     % "2.2.0",
+      "org.skinny-framework" %% "skinny-orm"      % "1.3.5"   % "provided",
+      "ch.qos.logback"       %  "logback-classic" % "1.1.2"   % "provided",
+      "org.skinny-framework" %  "skinny-logback"  % "1.0.3"   % "test",
+      "org.scalatest"        %% "scalatest"       % "2.2.2"   % "test"
+    ),
+    parallelExecution in Test := false,
+    logBuffered in Test := false,
+    scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature"),
+    initialCommands := """
 import scalikejdbc._
 import csvquery._
 implicit val session = autoCSVSession
@@ -60,19 +56,15 @@ object UserDAO extends SkinnyCSVMapper[User] {
 }
 val users = UserDAO.findAll()
 val alice = UserDAO.where('name -> "Alice").apply().headOption
-"""
-
-
-sonatypeSettings
-
-publishTo <<= version { (v: String) => 
-  val nexus = "https://oss.sonatype.org/"
-  if (v.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "content/repositories/snapshots")
-  else Some("releases" at nexus + "service/local/staging/deploy/maven2")
-}
-publishMavenStyle := true
-pomIncludeRepository := { x => false }
-pomExtra := <url>https://github.com/serach/csvquery/</url>
+""",
+    publishTo <<= version { (v: String) => 
+      val nexus = "https://oss.sonatype.org/"
+      if (v.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "content/repositories/snapshots")
+      else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+    },
+    publishMavenStyle := true,
+    pomIncludeRepository := { x => false },
+    pomExtra := <url>https://github.com/serach/csvquery/</url>
   <licenses>
     <license>
       <name>MIT License</name>
@@ -91,4 +83,7 @@ pomExtra := <url>https://github.com/serach/csvquery/</url>
       <url>http://git.io/sera</url>
     </developer>
   </developers>
+  ).settings(scalariformSettings: _*)
+   .settings(sonatypeSettings: _*)
+   .settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
