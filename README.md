@@ -3,6 +3,7 @@
 `CSVQuery` is a handy SQL runner to work with CSV files. You can use SQL to parse and filter CSV rows!
 
 [![Build Status](https://travis-ci.org/seratch/csvquery.svg)](https://travis-ci.org/seratch/csvquery)
+[![Coverage Status](https://coveralls.io/repos/seratch/csvquery/badge.png?branch=master)](https://coveralls.io/r/seratch/csvquery?branch=master)
 
 ## Prerequisites
 

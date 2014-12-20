@@ -6,12 +6,12 @@ lazy val root = (project in file("."))
     scalaVersion := "2.11.4",
     crossScalaVersions := Seq("2.10.4", "2.11.4"),
     libraryDependencies ++= Seq(
-      "com.h2database"       %  "h2"              % "1.4.182",
-      "org.scalikejdbc"      %% "scalikejdbc"     % "2.2.0",
-      "org.skinny-framework" %% "skinny-orm"      % "1.3.5"   % "provided",
+      "com.h2database"       %  "h2"              % "1.4.183",
+      "org.scalikejdbc"      %% "scalikejdbc"     % "2.2.1",
+      "org.skinny-framework" %% "skinny-orm"      % "1.3.8"   % "provided",
       "ch.qos.logback"       %  "logback-classic" % "1.1.2"   % "provided",
       "org.skinny-framework" %  "skinny-logback"  % "1.0.3"   % "test",
-      "org.scalatest"        %% "scalatest"       % "2.2.2"   % "test"
+      "org.scalatest"        %% "scalatest"       % "2.2.3"   % "test"
     ),
     parallelExecution in Test := false,
     logBuffered in Test := false,
