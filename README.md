@@ -2,8 +2,8 @@
 
 `CSVQuery` is a handy SQL runner to work with CSV files. You can use SQL to parse and filter CSV rows!
 
-[![Build Status](https://travis-ci.org/seratch/csvquery.svg)](https://travis-ci.org/seratch/csvquery)
-[![Coverage Status](https://coveralls.io/repos/seratch/csvquery/badge.png?branch=master)](https://coveralls.io/r/seratch/csvquery?branch=master)
+[![Build Status](https://travis-ci.org/scalikejdbc/csvquery.svg)](https://travis-ci.org/scalikejdbc/csvquery)
+[![Coverage Status](https://coveralls.io/repos/scalikejdbc/csvquery/badge.png?branch=master)](https://coveralls.io/r/scalikejdbc/csvquery?branch=master)
 
 ## Prerequisites
 
@@ -12,11 +12,11 @@
 ## Setup with [sbt](https://github.com/sbt/sbt)
 
 ```sh
-echo 'scalaVersion := "2.11.4"
+echo 'scalaVersion := "2.11.5"
 
 resolvers += "sonatype releases" at "https://oss.sonatype.org/content/repositories/releases"
 
-libraryDependencies += "com.github.seratch" %% "csvquery" % "0.2"' > build.sbt
+libraryDependencies += "org.scalikejdbc" %% "csvquery" % "1.0"' > build.sbt
 
 echo "Alice,23
 Bob,34
@@ -245,5 +245,5 @@ alice: Option[User] = Some(User(Alice,23))
 
 More examples here:
 
-https://github.com/seratch/csvquery/blob/master/src/test/scala/example/UsageSpec.scala
+https://github.com/scalikejdbc/csvquery/blob/master/src/test/scala/example/UsageSpec.scala
 
