@@ -64,7 +64,7 @@ val alice = UserDAO.where('name -> "Alice").apply().headOption
     },
     publishMavenStyle := true,
     pomIncludeRepository := { x => false },
-    pomExtra := <url>https://github.com/serach/csvquery/</url>
+    pomExtra := <url>https://github.com/scalikejdbc/csvquery/</url>
   <licenses>
     <license>
       <name>MIT License</name>
@@ -73,8 +73,8 @@ val alice = UserDAO.where('name -> "Alice").apply().headOption
     </license>
   </licenses>
   <scm>
-    <url>git@github.com:seratch/csvquery.git</url>
-    <connection>scm:git:git@github.com:seratch/csvquery.git</connection>
+    <url>git@github.com:scalikejdbc/csvquery.git</url>
+    <connection>scm:git:git@github.com:scalikejdbc/csvquery.git</connection>
   </scm>
   <developers>
     <developer>
