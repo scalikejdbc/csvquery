@@ -4,6 +4,5 @@ scala:
 - 2.11.5
 script: sbt clean coverage test
 after_success: sbt coveralls
-env:
-  global:
-    secure: D9G18LeDfVsT0bZauY4Ng1OVJDv2YDW1G3T/Rqwo8NNaN0bAPFT2Z2uNjZWRmF+J1KKa/kR1bgHmlZvO1FzZQIHwlDULpyuYlBl+mmeBMDBxNQ3+nbsE14J7jHcBW1LfY0+Iz2T7ZWQTtKW/bbxp6UWvCaWtUCjNEzY8sVwBd7c=
+dd:
+  secure: VvL4gMzq1UcdS06AZx1dDUCLYazyxNiKnm2xgQ/Hn/ur7dolI+1j/KcQAcIURE3hycW2KLR/I4lJZMHXwVdMafKLT2HEf8bwBLNJkRtu0oVh/pO7qzpNjhiG2ZkWIlQSkUaSNFRyZunqRwstt9P9suI89uU+c0DxQyP8y/VS7Cw=
