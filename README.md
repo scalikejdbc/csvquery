@@ -12,7 +12,7 @@
 ## Setup with [sbt](https://github.com/sbt/sbt)
 
 ```sh
-echo 'scalaVersion := "2.11.5"
+echo 'scalaVersion := "2.11.6"
 
 resolvers += "sonatype releases" at "https://oss.sonatype.org/content/repositories/releases"
 
