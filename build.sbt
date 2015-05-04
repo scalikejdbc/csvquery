@@ -2,16 +2,16 @@ lazy val root = (project in file("."))
   .settings(
     organization := "org.scalikejdbc",
     name := "csvquery",
-    version := "1.0",
+    version := "1.1",
     scalaVersion := "2.11.6",
     crossScalaVersions := Seq("2.10.5", "2.11.6"),
     libraryDependencies ++= Seq(
-      "com.h2database"       %  "h2"              % "1.4.+",
-      "org.scalikejdbc"      %% "scalikejdbc"     % "2.2.+",
-      "org.skinny-framework" %% "skinny-orm"      % "1.3.+"   % "provided",
-      "ch.qos.logback"       %  "logback-classic" % "1.1.+"   % "provided",
-      "org.skinny-framework" %  "skinny-logback"  % "1.0.+"   % "test",
-      "org.scalatest"        %% "scalatest"       % "2.2.+"   % "test"
+      "com.h2database"       %  "h2"              % "1.4.187",
+      "org.scalikejdbc"      %% "scalikejdbc"     % "2.2.6",
+      "org.skinny-framework" %% "skinny-orm"      % "1.3.17"  % "provided",
+      "ch.qos.logback"       %  "logback-classic" % "1.1.3"   % "provided",
+      "org.skinny-framework" %  "skinny-logback"  % "1.0.6"   % "test",
+      "org.scalatest"        %% "scalatest"       % "2.2.4"   % "test"
     ),
     parallelExecution in Test := false,
     logBuffered in Test := false,
@@ -57,11 +57,6 @@ object UserDAO extends SkinnyCSVMapper[User] {
 val users = UserDAO.findAll()
 val alice = UserDAO.where('name -> "Alice").apply().headOption
 """,
-    publishTo <<= version { (v: String) => 
-      val nexus = "https://oss.sonatype.org/"
-      if (v.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "content/repositories/snapshots")
-      else Some("releases" at nexus + "service/local/staging/deploy/maven2")
-    },
     publishMavenStyle := true,
     pomIncludeRepository := { x => false },
     pomExtra := <url>https://github.com/scalikejdbc/csvquery/</url>
@@ -84,6 +79,5 @@ val alice = UserDAO.where('name -> "Alice").apply().headOption
     </developer>
   </developers>
   ).settings(scalariformSettings: _*)
-   .settings(sonatypeSettings: _*)
    .settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
