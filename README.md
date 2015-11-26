@@ -16,7 +16,7 @@ echo 'scalaVersion := "2.11.6"
 
 resolvers += "sonatype releases" at "https://oss.sonatype.org/content/repositories/releases"
 
-libraryDependencies += "org.scalikejdbc" %% "csvquery" % "1.0"' > build.sbt
+libraryDependencies += "org.scalikejdbc" %% "csvquery" % "1.2"' > build.sbt
 
 echo "Alice,23
 Bob,34
