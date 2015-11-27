@@ -12,10 +12,8 @@
 ## Setup with [sbt](https://github.com/sbt/sbt)
 
 ```sh
-echo 'scalaVersion := "2.11.6"
-
+echo 'scalaVersion := "2.11.7"
 resolvers += "sonatype releases" at "https://oss.sonatype.org/content/repositories/releases"
-
 libraryDependencies += "org.scalikejdbc" %% "csvquery" % "1.2"' > build.sbt
 
 echo "Alice,23
@@ -246,4 +244,3 @@ alice: Option[User] = Some(User(Alice,23))
 More examples here:
 
 https://github.com/scalikejdbc/csvquery/blob/master/src/test/scala/example/UsageSpec.scala
-
