@@ -2,16 +2,16 @@ lazy val root = (project in file("."))
   .settings(
     organization := "org.scalikejdbc",
     name := "csvquery",
-    version := "1.2",
+    version := "1.2.1",
     scalaVersion := "2.11.7",
     crossScalaVersions := Seq("2.10.6", "2.11.7"),
     libraryDependencies ++= Seq(
-      "com.h2database"       %  "h2"              % "1.4.190",
-      "org.scalikejdbc"      %% "scalikejdbc"     % "2.3.0",
-      "org.skinny-framework" %% "skinny-orm"      % "2.0.1"   % "provided",
-      "ch.qos.logback"       %  "logback-classic" % "1.1.3"   % "provided",
-      "org.skinny-framework" %  "skinny-logback"  % "1.0.6"   % "test",
-      "org.scalatest"        %% "scalatest"       % "2.2.5"   % "test"
+      "com.h2database"       %  "h2"              % "1.4.191",
+      "org.scalikejdbc"      %% "scalikejdbc"     % "2.3.5",
+      "org.skinny-framework" %% "skinny-orm"      % "2.0.7"   % "provided",
+      "ch.qos.logback"       %  "logback-classic" % "1.1.4"   % "provided",
+      "org.skinny-framework" %  "skinny-logback"  % "1.0.7"   % "test",
+      "org.scalatest"        %% "scalatest"       % "2.2.6"   % "test"
     ),
     parallelExecution in Test := false,
     logBuffered in Test := false,
@@ -79,4 +79,3 @@ val alice = UserDAO.where('name -> "Alice").apply().headOption
     </developer>
   </developers>
   ).settings(scalariformSettings)
-   .settings(net.virtualvoid.sbt.graph.Plugin.graphSettings)

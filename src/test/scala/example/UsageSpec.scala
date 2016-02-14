@@ -74,7 +74,8 @@ class UsageSpec extends FunSpec with Matchers with Logging {
     crimedescr: String,
     ucrNcicCode: Int,
     latitude: Double,
-    longitude: Double)
+    longitude: Double
+  )
 
   object CrimeRecordDAO extends SkinnyCSVMapper[CrimeRecord] {
     def csv = CSV(filepath, headers)
