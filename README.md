@@ -12,9 +12,9 @@
 ## Setup with [sbt](https://github.com/sbt/sbt)
 
 ```sh
-echo 'scalaVersion := "2.11.7"
+echo 'scalaVersion := "2.11.8"
 resolvers += "sonatype releases" at "https://oss.sonatype.org/content/repositories/releases"
-libraryDependencies += "org.scalikejdbc" %% "csvquery" % "1.2"' > build.sbt
+libraryDependencies += "org.scalikejdbc" %% "csvquery" % "1.3.0"' > build.sbt
 
 echo "Alice,23
 Bob,34
