@@ -3,15 +3,15 @@ lazy val root = (project in file("."))
     organization := "org.scalikejdbc",
     name := "csvquery",
     version := "1.4.0",
-    scalaVersion := "2.12.0",
-    crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0"),
+    scalaVersion := "2.12.1",
+    crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.1"),
     libraryDependencies ++= Seq(
       "com.h2database"       %  "h2"              % "1.4.193",
       "org.scalikejdbc"      %% "scalikejdbc"     % "2.5.0",
-      "org.skinny-framework" %% "skinny-orm"      % "2.3.0"     % "provided",
-      "ch.qos.logback"       %  "logback-classic" % "1.1.7"     % "provided",
-      "org.skinny-framework" %  "skinny-logback"  % "1.0.9"     % "test",
-      "org.scalatest"        %% "scalatest"       % "3.0.0"     % "test"
+      "org.skinny-framework" %% "skinny-orm"      % "2.3.1"     % "provided",
+      "ch.qos.logback"       %  "logback-classic" % "1.1.8"     % "provided",
+      "org.skinny-framework" %  "skinny-logback"  % "1.0.10"    % "test",
+      "org.scalatest"        %% "scalatest"       % "3.0.1"     % "test"
     ),
     parallelExecution in Test := false,
     logBuffered in Test := false,
