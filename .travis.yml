@@ -2,12 +2,12 @@ language: scala
 sudo: false
 scala:
 - 2.10.6
-- 2.11.8
+- 2.11.11
 script: sbt ++${TRAVIS_SCALA_VERSION} coverage test
 after_success: sbt coveralls
 dd:
   secure: VvL4gMzq1UcdS06AZx1dDUCLYazyxNiKnm2xgQ/Hn/ur7dolI+1j/KcQAcIURE3hycW2KLR/I4lJZMHXwVdMafKLT2HEf8bwBLNJkRtu0oVh/pO7qzpNjhiG2ZkWIlQSkUaSNFRyZunqRwstt9P9suI89uU+c0DxQyP8y/VS7Cw=
 matrix:
   include:
-  - scala: 2.12.1
+  - scala: 2.12.2
     jdk: oraclejdk8
