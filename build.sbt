@@ -2,7 +2,7 @@ lazy val root = (project in file("."))
   .settings(
     organization := "org.scalikejdbc",
     name := "csvquery",
-    version := "1.4.0",
+    version := "1.4.1-SNAPSHOT",
     scalaVersion := "2.12.1",
     crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.1"),
     libraryDependencies ++= Seq(
