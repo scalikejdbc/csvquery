@@ -2,9 +2,9 @@ language: scala
 sudo: false
 jdk: oraclejdk8
 scala:
-- 2.10.6
-- 2.11.11
-- 2.12.2
+- 2.10.7
+- 2.11.12
+- 2.12.4
 script: sbt ++${TRAVIS_SCALA_VERSION} coverage test
 after_success: sbt coveralls
 dd:
