@@ -2,16 +2,17 @@ lazy val root = (project in file("."))
   .settings(
     organization := "org.scalikejdbc",
     name := "csvquery",
-    version := "1.4.1-SNAPSHOT",
-    scalaVersion := "2.12.4",
-    crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.4"),
+    version := "1.5.0-SNAPSHOT",
+    scalaVersion := "2.12.6",
+    crossScalaVersions := Seq("2.11.12", "2.12.6"),
+    resolvers += "sonatype releases" at "https://oss.sonatype.org/content/repositories/releases",
     libraryDependencies ++= Seq(
-      "com.h2database"       %  "h2"              % "1.4.196",
-      "org.scalikejdbc"      %% "scalikejdbc"     % "3.0.1",
-      "org.skinny-framework" %% "skinny-orm"      % "2.3.7"     % "provided",
+      "com.h2database"       %  "h2"              % "1.4.197",
+      "org.scalikejdbc"      %% "scalikejdbc"     % "3.3.0",
+      "org.skinny-framework" %% "skinny-orm"      % "3.0.0-RC3" % "provided",
       "ch.qos.logback"       %  "logback-classic" % "1.2.3"     % "provided",
       "org.skinny-framework" %  "skinny-logback"  % "1.0.14"    % "test",
-      "org.scalatest"        %% "scalatest"       % "3.0.3"     % "test"
+      "org.scalatest"        %% "scalatest"       % "3.0.5"     % "test"
     ),
     parallelExecution in Test := false,
     logBuffered in Test := false,
@@ -78,4 +79,4 @@ val alice = UserDAO.where('name -> "Alice").apply().headOption
       <url>http://git.io/sera</url>
     </developer>
   </developers>
-  ).settings(scalariformSettings)
+  )

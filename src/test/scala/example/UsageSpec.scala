@@ -41,15 +41,13 @@ class UsageSpec extends FunSpec with Matchers with Logging {
       implicit val session = autoCSVSession
       val (accountsCsv, companiesCsv) = (
         CSV("src/test/resources/accounts.csv", Seq("name", "company_name")),
-        CSV("src/test/resources/companies.csv", Seq("name", "url"))
-      )
+        CSV("src/test/resources/companies.csv", Seq("name", "url")))
       val accounts = withCSV(accountsCsv, companiesCsv) { (a, c) =>
         sql"select a.name, a.company_name, c.url from $a a left join $c c on a.company_name = c.name".map { rs =>
           new Account(
             name = rs.get("name"),
             companyName = rs.get("company_name"),
-            company = rs.stringOpt("url").map(url => Company(rs.get("company_name"), url))
-          )
+            company = rs.stringOpt("url").map(url => Company(rs.get("company_name"), url)))
         }.list.apply()
       }
       logger.info("records: " + accounts)
@@ -74,8 +72,7 @@ class UsageSpec extends FunSpec with Matchers with Logging {
     crimedescr: String,
     ucrNcicCode: Int,
     latitude: Double,
-    longitude: Double
-  )
+    longitude: Double)
 
   object CrimeRecordDAO extends SkinnyCSVMapper[CrimeRecord] {
     def csv = CSV(filepath, headers)
