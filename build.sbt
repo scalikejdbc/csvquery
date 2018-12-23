@@ -8,8 +8,8 @@ lazy val root = (project in file("."))
     resolvers += "sonatype releases" at "https://oss.sonatype.org/content/repositories/releases",
     libraryDependencies ++= Seq(
       "com.h2database"       %  "h2"              % "1.4.197",
-      "org.scalikejdbc"      %% "scalikejdbc"     % "3.3.0",
-      "org.skinny-framework" %% "skinny-orm"      % "3.0.0-RC3" % "provided",
+      "org.scalikejdbc"      %% "scalikejdbc"     % "3.3.2",
+      "org.skinny-framework" %% "skinny-orm"      % "3.0.1" % "provided",
       "ch.qos.logback"       %  "logback-classic" % "1.2.3"     % "provided",
       "org.skinny-framework" %  "skinny-logback"  % "1.0.14"    % "test",
       "org.scalatest"        %% "scalatest"       % "3.0.5"     % "test"
