@@ -4,12 +4,12 @@ lazy val root = (project in file("."))
     name := "csvquery",
     version := "1.5.0-SNAPSHOT",
     scalaVersion := "2.12.8",
-    crossScalaVersions := Seq("2.11.12", "2.12.8"),
+    crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0"),
     resolvers += "sonatype releases" at "https://oss.sonatype.org/content/repositories/releases",
     libraryDependencies ++= Seq(
       "com.h2database"       %  "h2"              % "1.4.197",
       "org.scalikejdbc"      %% "scalikejdbc"     % "3.3.5",
-      "org.skinny-framework" %% "skinny-orm"      % "3.0.2" % "provided",
+      "org.skinny-framework" %% "skinny-orm"      % "3.0.3" % "provided",
       "ch.qos.logback"       %  "logback-classic" % "1.2.3"     % "provided",
       "org.skinny-framework" %  "skinny-logback"  % "1.0.14"    % "test",
       "org.scalatest"        %% "scalatest"       % "3.0.8"     % "test"
