@@ -5,7 +5,6 @@ lazy val root = (project in file("."))
     version := "1.5.0-SNAPSHOT",
     scalaVersion := "2.12.8",
     crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0"),
-    resolvers += "sonatype releases" at "https://oss.sonatype.org/content/repositories/releases",
     libraryDependencies ++= Seq(
       "com.h2database"       %  "h2"              % "1.4.197",
       "org.scalikejdbc"      %% "scalikejdbc"     % "3.3.5",
