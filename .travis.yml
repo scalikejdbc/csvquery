@@ -10,5 +10,6 @@ scala:
 - 2.13.0
 script: sbt ++${TRAVIS_SCALA_VERSION} coverage test
 after_success: sbt coveralls
-dd:
-  secure: VvL4gMzq1UcdS06AZx1dDUCLYazyxNiKnm2xgQ/Hn/ur7dolI+1j/KcQAcIURE3hycW2KLR/I4lJZMHXwVdMafKLT2HEf8bwBLNJkRtu0oVh/pO7qzpNjhiG2ZkWIlQSkUaSNFRyZunqRwstt9P9suI89uU+c0DxQyP8y/VS7Cw=
+env:
+  global:
+    secure: VvL4gMzq1UcdS06AZx1dDUCLYazyxNiKnm2xgQ/Hn/ur7dolI+1j/KcQAcIURE3hycW2KLR/I4lJZMHXwVdMafKLT2HEf8bwBLNJkRtu0oVh/pO7qzpNjhiG2ZkWIlQSkUaSNFRyZunqRwstt9P9suI89uU+c0DxQyP8y/VS7Cw=
