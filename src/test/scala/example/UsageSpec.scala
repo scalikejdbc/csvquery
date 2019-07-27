@@ -56,7 +56,7 @@ class UsageSpec extends FunSpec with Matchers with Logging {
 
     it("fails to update csv records") {
       implicit val session = autoCSVSession
-      intercept[org.h2.jdbc.JdbcSQLException] {
+      intercept[org.h2.jdbc.JdbcSQLSyntaxErrorException] {
         withCSV(CSV(filepath, headers)) { table => sql"delete from $table".update.apply() }
       }
     }

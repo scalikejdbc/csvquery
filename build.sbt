@@ -2,13 +2,13 @@ lazy val root = (project in file("."))
   .settings(
     organization := "org.scalikejdbc",
     name := "csvquery",
-    version := "1.5.0-SNAPSHOT",
-    scalaVersion := "2.12.8",
+    version := "1.5.0",
+    scalaVersion := "2.13.0",
     crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0"),
     libraryDependencies ++= Seq(
-      "com.h2database"       %  "h2"              % "1.4.197",
+      "com.h2database"       %  "h2"              % "1.4.199",
       "org.scalikejdbc"      %% "scalikejdbc"     % "3.3.5",
-      "org.skinny-framework" %% "skinny-orm"      % "3.0.3" % "provided",
+      "org.skinny-framework" %% "skinny-orm"      % "3.0.3"     % "provided",
       "ch.qos.logback"       %  "logback-classic" % "1.2.3"     % "provided",
       "org.skinny-framework" %  "skinny-logback"  % "1.0.14"    % "test",
       "org.scalatest"        %% "scalatest"       % "3.0.8"     % "test"
@@ -57,6 +57,11 @@ object UserDAO extends SkinnyCSVMapper[User] {
 val users = UserDAO.findAll()
 val alice = UserDAO.where('name -> "Alice").apply().headOption
 """,
+    publishTo := {
+      val nexus = "https://oss.sonatype.org/"
+      if (version.value.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "content/repositories/snapshots")
+      else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+    },
     publishMavenStyle := true,
     pomIncludeRepository := { x => false },
     pomExtra := <url>https://github.com/scalikejdbc/csvquery/</url>
