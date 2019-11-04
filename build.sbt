@@ -7,7 +7,7 @@ lazy val root = (project in file("."))
     crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0"),
     libraryDependencies ++= Seq(
       "com.h2database"       %  "h2"              % "1.4.199",
-      "org.scalikejdbc"      %% "scalikejdbc"     % "3.3.5",
+      "org.scalikejdbc"      %% "scalikejdbc"     % "3.4.0",
       "org.skinny-framework" %% "skinny-orm"      % "3.0.3"     % "provided",
       "ch.qos.logback"       %  "logback-classic" % "1.2.3"     % "provided",
       "org.skinny-framework" %  "skinny-logback"  % "1.0.14"    % "test",
