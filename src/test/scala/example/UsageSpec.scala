@@ -5,8 +5,10 @@ import csvquery._
 import scalikejdbc._
 import org.joda.time._
 import skinny.logging.Logging
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.should.Matchers
 
-class UsageSpec extends FunSpec with Matchers with Logging {
+class UsageSpec extends AnyFunSpec with Matchers with Logging {
 
   // http://support.spatialkey.com/spatialkey-sample-csv-data/
   val filepath = "src/test/resources/SacramentocrimeJanuary2006.csv"
