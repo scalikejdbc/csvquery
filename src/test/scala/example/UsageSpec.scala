@@ -84,7 +84,7 @@ class UsageSpec extends AnyFunSpec with Matchers with Logging {
   describe("SkinnyCSVMapper") {
     it("runs queries") {
       val records: Seq[CrimeRecord] = withSession { implicit s =>
-        CrimeRecordDAO.where('crimedescr -> "459 PC  BURGLARY BUSINESS").apply()
+        CrimeRecordDAO.where(Symbol("crimedescr") -> "459 PC  BURGLARY BUSINESS").apply()
       }
       logger.info("resuls: " + records.take(5))
       records.size should equal(135)
