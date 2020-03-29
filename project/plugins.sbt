@@ -1,5 +1,5 @@
 addSbtPlugin("org.scalariform"  % "sbt-scalariform"      % "1.8.3")
-addSbtPlugin("org.xerial.sbt"   % "sbt-sonatype"         % "3.8.1")
+addSbtPlugin("org.xerial.sbt"   % "sbt-sonatype"         % "3.9.2")
 addSbtPlugin("com.jsuereth"     % "sbt-pgp"              % "1.1.2")
 addSbtPlugin("com.timushev.sbt" % "sbt-updates"          % "0.5.0")
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.9.2")
