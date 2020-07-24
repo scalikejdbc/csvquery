@@ -2,7 +2,7 @@
 
 `CSVQuery` is a handy SQL runner to work with CSV files. You can use SQL to parse and filter CSV rows!
 
-[![Build Status](https://travis-ci.org/scalikejdbc/csvquery.svg)](https://travis-ci.org/scalikejdbc/csvquery)
+[![Build Status](https://travis-ci.com/scalikejdbc/csvquery.svg)](https://travis-ci.com/scalikejdbc/csvquery)
 [![Coverage Status](https://coveralls.io/repos/scalikejdbc/csvquery/badge.png?branch=master)](https://coveralls.io/r/scalikejdbc/csvquery?branch=master)
 
 ## Prerequisites
