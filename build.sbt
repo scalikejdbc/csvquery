@@ -11,7 +11,7 @@ lazy val root = (project in file("."))
       "org.skinny-framework" %% "skinny-orm"      % "3.1.0"     % "provided",
       "ch.qos.logback"       %  "logback-classic" % "1.2.3"     % "provided",
       "org.skinny-framework" %  "skinny-logback"  % "1.0.14"    % "test",
-      "org.scalatest"        %% "scalatest"       % "3.2.2"     % "test"
+      "org.scalatest"        %% "scalatest"       % "3.2.3"     % "test"
     ),
     parallelExecution in Test := false,
     logBuffered in Test := false,
