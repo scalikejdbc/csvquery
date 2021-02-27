@@ -68,7 +68,7 @@ val alice = UserDAO.where('name -> "Alice").apply().headOption
   <licenses>
     <license>
       <name>MIT License</name>
-      <url>http://www.opensource.org/licenses/mit-license.php</url>
+      <url>https://www.opensource.org/licenses/mit-license</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
@@ -80,7 +80,7 @@ val alice = UserDAO.where('name -> "Alice").apply().headOption
     <developer>
       <id>seratch</id>
       <name>Kazuhiro Sera</name>
-      <url>http://git.io/sera</url>
+      <url>https://git.io/sera</url>
     </developer>
   </developers>
   )
