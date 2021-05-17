@@ -13,8 +13,8 @@ lazy val root = (project in file("."))
       "org.skinny-framework" %  "skinny-logback"  % "1.0.14"    % "test",
       "org.scalatest"        %% "scalatest"       % "3.2.9"     % "test"
     ),
-    parallelExecution in Test := false,
-    logBuffered in Test := false,
+    Test / parallelExecution := false,
+    Test / logBuffered := false,
     scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature"),
     initialCommands := """
 import scalikejdbc._
