@@ -57,19 +57,6 @@ val accounts: Seq[Account] = withCSV(accountsCsv, companiesCsv) { (a, c) =>
     )
   }.list.apply()
 }
-
-// ---
-// SkinnyCSVMapper examples
-// also required: "org.skinny-framework" %% "skinny-orm"
-// NOTICE: Compilation of DAO definitio on the REPL fails, use initialCommands instead.
-
-case class User(name: String, age: Int)
-object UserDAO extends SkinnyCSVMapper[User] {
-  def csv = CSV("./sample.csv", Seq("name", "age"))
-  override def extract(rs: WrappedResultSet, rn: ResultName[User]) = autoConstruct(rs, rn)
-}
-val users = UserDAO.findAll()
-val alice = UserDAO.where('name -> "Alice").apply().headOption
 ```
 
 Output example:
@@ -180,62 +167,6 @@ scala> val accounts: Seq[Account] = withCSV(accountsCsv, companiesCsv) { (a, c) 
     ...
 
 accounts: Seq[Account] = List(Account(Alice,Oracle,Some(Company(Oracle,http://www.oracle.com/index.html))), Account(Bob,Google,Some(Company(Google,https://www.google.com/))), Account(Chris,Google,Some(Company(Google,https://www.google.com/))), Account(Denis,Microsoft,None), Account(Eric,Red Hat,Some(Company(Red Hat,http://www.redhat.com/en))), Account(Fred,Facebook,Some(Company(Facebook,https://www.facebook.com/))), Account(George,Google,Some(Company(Google,https://www.google.com/))), Account(Henry,Twitter,Some(Company(Twitter,https://twitter.com/))), Account(Iris,Microsoft,None), Account(John,Google,Some(Company(Google,https://www.google.com/))))
-
-
-scala> val users = UserDAO.findAll()
-13:14:29.032 [run-main-0] DEBUG s.StatementExecutor$$anon$1 - SQL execution completed
-
-  [SQL Execution]
-   select csv.name as n_on_csv, csv.age as a_on_csv from csvread('./sample.csv', 'NAME,AGE', 'UTF-8') csv; (1 ms)
-
-  [Stack Trace]
-    ...
-    skinny.orm.feature.NoIdFinderFeature$class.findAll(NoIdFinderFeature.scala:48)
-    $line1.$read$$iw$$iw$UserDAO$.findAll(<console>:24)
-    $line10.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$.<init>(<console>:24)
-    $line10.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$.<clinit>(<console>)
-    $line10.$eval$.$print$lzycompute(<console>:7)
-    $line10.$eval$.$print(<console>:6)
-    $line10.$eval.$print(<console>)
-    sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-    sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-    sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-    java.lang.reflect.Method.invoke(Method.java:483)
-    scala.tools.nsc.interpreter.IMain$ReadEvalPrint.call(IMain.scala:739)
-    scala.tools.nsc.interpreter.IMain$Request.loadAndRun(IMain.scala:986)
-    scala.tools.nsc.interpreter.IMain$WrappedRequest$$anonfun$loadAndRunReq$1.apply(IMain.scala:593)
-    scala.tools.nsc.interpreter.IMain$WrappedRequest$$anonfun$loadAndRunReq$1.apply(IMain.scala:592)
-    ...
-
-users: List[User] = List(User(Alice,23), User(Bob,34), User(Chris,30))
-
-scala> val alice = UserDAO.where('name -> "Alice").apply().headOption
-13:14:35.929 [run-main-0] DEBUG s.StatementExecutor$$anon$1 - SQL execution completed
-
-  [SQL Execution]
-   select csv.name as n_on_csv, csv.age as a_on_csv from csvread('./sample.csv', 'NAME,AGE', 'UTF-8') csv where csv.name = 'Alice'; (1 ms)
-
-  [Stack Trace]
-    ...
-    skinny.orm.feature.NoIdQueryingFeature$EntitiesSelectOperationBuilder.apply(NoIdQueryingFeature.scala:239)
-    $line11.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$.<init>(<console>:24)
-    $line11.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$.<clinit>(<console>:24)
-    $line11.$eval$.$print$lzycompute(<console>:7)
-    $line11.$eval$.$print(<console>:6)
-    $line11.$eval.$print(<console>)
-    sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-    sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-    sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-    java.lang.reflect.Method.invoke(Method.java:483)
-    scala.tools.nsc.interpreter.IMain$ReadEvalPrint.call(IMain.scala:739)
-    scala.tools.nsc.interpreter.IMain$Request.loadAndRun(IMain.scala:986)
-    scala.tools.nsc.interpreter.IMain$WrappedRequest$$anonfun$loadAndRunReq$1.apply(IMain.scala:593)
-    scala.tools.nsc.interpreter.IMain$WrappedRequest$$anonfun$loadAndRunReq$1.apply(IMain.scala:592)
-    scala.reflect.internal.util.ScalaClassLoader$class.asContext(ScalaClassLoader.scala:31)
-    ...
-
-alice: Option[User] = Some(User(Alice,23))
-
 ```
 
 More examples here:
