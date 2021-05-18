@@ -3,12 +3,10 @@ package example
 import org.scalatest._
 import csvquery._
 import scalikejdbc._
-import org.joda.time._
-import skinny.logging.Logging
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
 
-class UsageSpec extends AnyFunSpec with Matchers with Logging {
+class UsageSpec extends AnyFunSpec with Matchers {
 
   // http://support.spatialkey.com/spatialkey-sample-csv-data/
   val filepath = "src/test/resources/SacramentocrimeJanuary2006.csv"
@@ -32,7 +30,6 @@ class UsageSpec extends AnyFunSpec with Matchers with Logging {
         sql"select cdatetime, address, latitude from $table where latitude >= $from and latitude <= $to"
           .toMap.list.apply()
       }
-      logger.info("records: " + records.take(5))
       records.size should equal(1258)
     }
 
@@ -52,7 +49,6 @@ class UsageSpec extends AnyFunSpec with Matchers with Logging {
             company = rs.stringOpt("url").map(url => Company(rs.get("company_name"), url)))
         }.list.apply()
       }
-      logger.info("records: " + accounts)
       accounts.size should equal(10)
     }
 
@@ -63,32 +59,6 @@ class UsageSpec extends AnyFunSpec with Matchers with Logging {
       }
     }
 
-  }
-
-  case class CrimeRecord(
-    cdatetime: String,
-    address: String,
-    district: Int,
-    beat: String,
-    grid: Int,
-    crimedescr: String,
-    ucrNcicCode: Int,
-    latitude: Double,
-    longitude: Double)
-
-  object CrimeRecordDAO extends SkinnyCSVMapper[CrimeRecord] {
-    def csv = CSV(filepath, headers)
-    override def extract(rs: WrappedResultSet, n: ResultName[CrimeRecord]) = autoConstruct(rs, n)
-  }
-
-  describe("SkinnyCSVMapper") {
-    it("runs queries") {
-      val records: Seq[CrimeRecord] = withSession { implicit s =>
-        CrimeRecordDAO.where(Symbol("crimedescr") -> "459 PC  BURGLARY BUSINESS").apply()
-      }
-      logger.info("resuls: " + records.take(5))
-      records.size should equal(135)
-    }
   }
 
 }

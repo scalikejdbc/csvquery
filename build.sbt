@@ -8,9 +8,7 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       "com.h2database"       %  "h2"              % "1.4.200",
       "org.scalikejdbc"      %% "scalikejdbc"     % "3.4.2",
-      "org.skinny-framework" %% "skinny-orm"      % "3.1.0"     % "provided",
       "ch.qos.logback"       %  "logback-classic" % "1.2.3"     % "provided",
-      "org.skinny-framework" %  "skinny-logback"  % "1.0.14"    % "test",
       "org.scalatest"        %% "scalatest"       % "3.2.9"     % "test"
     ),
     Test / parallelExecution := false,
@@ -47,15 +45,6 @@ val accounts: Seq[Account] = withCSV(accountsCsv, companiesCsv) { (a, c) =>
     )
   }.list.apply()
 }
-
-// NOTE: compilation on the REPL fails, use initialCommands instead.
-case class User(name: String, age: Int)
-object UserDAO extends SkinnyCSVMapper[User] {
-  def csv = CSV("./sample.csv", Seq("name", "age"))
-  override def extract(rs: WrappedResultSet, rn: ResultName[User]) = autoConstruct(rs, rn)
-}
-val users = UserDAO.findAll()
-val alice = UserDAO.where('name -> "Alice").apply().headOption
 """,
     publishTo := {
       val nexus = "https://oss.sonatype.org/"
