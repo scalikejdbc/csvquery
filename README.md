@@ -19,7 +19,7 @@ And then try the folling things on `sbt console`.
 ```scala
 import scalikejdbc._
 import csvquery._
-implicit val session = autoCSVSession
+implicit val session: DBSession = autoCSVSession
 
 // ---
 // simple queries
@@ -64,7 +64,7 @@ import scalikejdbc._
 scala> import csvquery._
 import csvquery._
 
-scala> implicit val session = autoCSVSession
+scala> implicit val session: DBSession = autoCSVSession
 13:14:11.078 [run-main-0] DEBUG scalikejdbc.ConnectionPool$ - Registered connection pool : ConnectionPool(url:jdbc:h2:mem:csvquery-1413951250977, user:) using factory : <default>
 session: scalikejdbc.DBSession = NamedAutoSession(csvquery-1413951250977)
 
