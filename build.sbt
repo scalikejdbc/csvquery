@@ -20,7 +20,7 @@ import csvquery._
 
 Class.forName("org.h2.Driver")
 
-implicit val session = autoCSVSession
+implicit val session: DBSession = autoCSVSession
 
 val csv = CSV("./sample.csv", Seq("name", "age"))
 
