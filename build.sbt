@@ -17,6 +17,9 @@ lazy val root = (project in file("."))
     initialCommands := """
 import scalikejdbc._
 import csvquery._
+
+Class.forName("org.h2.Driver")
+
 implicit val session = autoCSVSession
 
 val csv = CSV("./sample.csv", Seq("name", "age"))
