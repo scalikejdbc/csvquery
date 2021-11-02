@@ -3,8 +3,8 @@ lazy val root = (project in file("."))
     organization := "org.scalikejdbc",
     name := "csvquery",
     version := "1.5.1-SNAPSHOT",
-    scalaVersion := "2.13.6",
-    crossScalaVersions := Seq("2.12.15", "2.13.6", "3.1.0"),
+    scalaVersion := "2.13.7",
+    crossScalaVersions := Seq("2.12.15", "2.13.7", "3.1.0"),
     libraryDependencies ++= Seq(
       "com.h2database"       %  "h2"              % "1.4.200",
       "org.scalikejdbc"      %% "scalikejdbc"     % "4.0.0",
