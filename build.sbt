@@ -8,7 +8,7 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       "com.h2database"       %  "h2"              % "1.4.200",
       "org.scalikejdbc"      %% "scalikejdbc"     % "4.0.0",
-      "ch.qos.logback"       %  "logback-classic" % "1.2.6"     % "provided",
+      "ch.qos.logback"       %  "logback-classic" % "1.2.7"     % "provided",
       "org.scalatest"        %% "scalatest"       % "3.2.10"     % "test"
     ),
     Test / parallelExecution := false,
