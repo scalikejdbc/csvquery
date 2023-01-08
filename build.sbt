@@ -6,11 +6,11 @@ lazy val root = (project in file("."))
     scalaVersion := "2.13.10",
     crossScalaVersions := Seq("2.12.17", "2.13.10", "3.2.1"),
     libraryDependencies ++= Seq(
-      "com.h2database"       %  "h2"              % "2.1.214",
-      "org.scalikejdbc"      %% "scalikejdbc"     % "4.0.0",
-      "ch.qos.logback"       %  "logback-classic" % "1.2.11"     % "provided",
-      "org.scalatest"        %% "scalatest-funspec" % "3.2.15" % "test",
-      "org.scalatest"        %% "scalatest-shouldmatchers" % "3.2.15" % "test"
+      "com.h2database" % "h2" % "2.1.214",
+      "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
+      "ch.qos.logback" % "logback-classic" % "1.2.11" % "provided",
+      "org.scalatest" %% "scalatest-funspec" % "3.2.15" % "test",
+      "org.scalatest" %% "scalatest-shouldmatchers" % "3.2.15" % "test"
     ),
     Test / parallelExecution := false,
     Test / logBuffered := false,
@@ -52,7 +52,8 @@ val accounts: Seq[Account] = withCSV(accountsCsv, companiesCsv) { (a, c) =>
 """,
     publishTo := {
       val nexus = "https://oss.sonatype.org/"
-      if (version.value.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "content/repositories/snapshots")
+      if (version.value.trim.endsWith("SNAPSHOT"))
+        Some("snapshots" at nexus + "content/repositories/snapshots")
       else Some("releases" at nexus + "service/local/staging/deploy/maven2")
     },
     publishMavenStyle := true,
