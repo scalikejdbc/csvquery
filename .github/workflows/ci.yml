@@ -20,4 +20,4 @@ jobs:
       with:
         java-version: ${{matrix.java}}
         distribution: temurin
-    - run: sbt -v "+test"
+    - run: sbt -v "+ scalafmtCheckAll" scalafmtSbtCheck "+test"

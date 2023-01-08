@@ -2,7 +2,11 @@ package csvquery
 
 import scalikejdbc._
 
-case class CSV(filepath: String, columns: Seq[String], charset: String = "UTF-8") {
+case class CSV(
+  filepath: String,
+  columns: Seq[String],
+  charset: String = "UTF-8"
+) {
 
   def toTable: SQLSyntax = {
     val file = sqls"'${unsafe(filepath)}'"
@@ -13,4 +17,3 @@ case class CSV(filepath: String, columns: Seq[String], charset: String = "UTF-8"
 
   private[this] def unsafe(v: String): SQLSyntax = SQLSyntax.createUnsafely(v)
 }
-
