@@ -9,8 +9,8 @@ lazy val root = (project in file("."))
       "com.h2database" % "h2" % "2.2.222",
       "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
       "ch.qos.logback" % "logback-classic" % "1.2.12" % "provided",
-      "org.scalatest" %% "scalatest-funspec" % "3.2.16" % "test",
-      "org.scalatest" %% "scalatest-shouldmatchers" % "3.2.16" % "test"
+      "org.scalatest" %% "scalatest-funspec" % "3.2.17" % "test",
+      "org.scalatest" %% "scalatest-shouldmatchers" % "3.2.17" % "test"
     ),
     Test / parallelExecution := false,
     Test / logBuffered := false,
