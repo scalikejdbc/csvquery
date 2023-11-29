@@ -8,7 +8,7 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       "com.h2database" % "h2" % "2.2.224",
       "org.scalikejdbc" %% "scalikejdbc" % "4.1.0",
-      "ch.qos.logback" % "logback-classic" % "1.2.12" % "provided",
+      "ch.qos.logback" % "logback-classic" % "1.4.13" % "provided",
       "org.scalatest" %% "scalatest-funspec" % "3.2.17" % "test",
       "org.scalatest" %% "scalatest-shouldmatchers" % "3.2.17" % "test"
     ),
