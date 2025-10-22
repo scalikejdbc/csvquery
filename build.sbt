@@ -51,10 +51,8 @@ val accounts: Seq[Account] = withCSV(accountsCsv, companiesCsv) { (a, c) =>
 }
 """,
     publishTo := {
-      val nexus = "https://oss.sonatype.org/"
-      if (version.value.trim.endsWith("SNAPSHOT"))
-        Some("snapshots" at nexus + "content/repositories/snapshots")
-      else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+      if (isSnapshot.value) { None }
+      else { localStaging.value }
     },
     publishMavenStyle := true,
     pomIncludeRepository := { x => false },
