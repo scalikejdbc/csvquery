@@ -5,7 +5,7 @@
 ## Setup with [sbt](https://github.com/sbt/sbt)
 
 ```sh
-echo 'scalaVersion := "2.13.17"
+echo 'scalaVersion := "2.13.18"
 
 libraryDependencies += "org.scalikejdbc" %% "csvquery" % "1.5.0"' > build.sbt
 
