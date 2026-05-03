@@ -14,7 +14,12 @@ lazy val root = (project in file("."))
     ),
     Test / parallelExecution := false,
     Test / logBuffered := false,
-    scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature"),
+    scalacOptions ++= Seq(
+      "-unchecked",
+      "-deprecation",
+      "-feature",
+      "-release:8"
+    ),
     initialCommands := """
 import scalikejdbc._
 import csvquery._
