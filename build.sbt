@@ -4,7 +4,7 @@ lazy val root = (project in file("."))
     name := "csvquery",
     version := "1.5.1-SNAPSHOT",
     scalaVersion := "2.13.18",
-    crossScalaVersions := Seq("2.12.21", "2.13.18", "3.3.8"),
+    crossScalaVersions := Seq("2.12.21", "2.13.18", "3.9.0"),
     libraryDependencies ++= Seq(
       "com.h2database" % "h2" % "2.5.250",
       "org.scalikejdbc" %% "scalikejdbc" % "4.3.5",
@@ -14,11 +14,18 @@ lazy val root = (project in file("."))
     ),
     Test / parallelExecution := false,
     Test / logBuffered := false,
+    scalacOptions ++= {
+      scalaBinaryVersion.value match {
+        case "3" =>
+          Nil
+        case _ =>
+          Seq("-release:8")
+      }
+    },
     scalacOptions ++= Seq(
       "-unchecked",
       "-deprecation",
       "-feature",
-      "-release:8"
     ),
     initialCommands := """
 import scalikejdbc._
