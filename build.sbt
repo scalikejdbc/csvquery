@@ -14,11 +14,18 @@ lazy val root = (project in file("."))
     ),
     Test / parallelExecution := false,
     Test / logBuffered := false,
+    scalacOptions ++= {
+      scalaBinaryVersion.value match {
+        case "3" =>
+          Nil
+        case _ =>
+          Seq("-release:8")
+      }
+    },
     scalacOptions ++= Seq(
       "-unchecked",
       "-deprecation",
       "-feature",
-      "-release:8"
     ),
     initialCommands := """
 import scalikejdbc._
